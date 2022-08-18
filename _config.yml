@@ -1,2 +1,2 @@
-theme: jekyll-theme-cayman
-markdown: kramdown
+- name: Lint Markdown
+  uses: tomwhross/write-good-action@v1.5
