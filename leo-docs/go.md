@@ -3,8 +3,7 @@
 ## go内存泄露怎么排查
 用pprof定位，一般是Goroutine没有退出导致的。
 
-1. goroutine开启的数量过多
-2. 内存逃逸过多
+goroutine开启的数量过多
 
 - 从channel中读或写，但没有对应的写或读
 - 在使用select时，所有的case都阻塞，没有正确退出，导致goroutine一直存在
