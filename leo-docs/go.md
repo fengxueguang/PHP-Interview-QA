@@ -101,12 +101,52 @@ https://codeup.aliyun.com/634d054f67fa83af64bcfedd/fengxueguang/PHP-Interview-QA
 正常的是跳表，还有一个压缩列表。
 
 ## 内存逃逸会造成什么，怎么形成的
+
+## 读取一个关闭的channel会怎么样
+读已关闭的channel
+
+读已经关闭的channel无影响。
+
+如果在关闭前，通道内部有元素，会正确读到元素的值；如果关闭前通道无元素，则会读取到通道内元素类型对应的零值。
+
+若遍历通道，如果通道未关闭，读完元素后，会报死锁的错误。
+
+fatal error: all goroutines are asleep - deadlock!
+
+写已关闭的通道
+
+会引发panic: send on closed channel
+
+关闭已关闭的通道
+
+会引发panic: close of closed channel 
+
+从一个有缓冲的 channel 里读数据，当 channel 被关闭，依然能读出有效值。只有当返回的 ok 为 false 时，读出的数据才是无效的。
+
 ## sync.map 是怎么实现的
+有一个read map(只读)， 一个dirty map,miss的次数多了就会把dirty提升为read
+
 ## 高并发怎么无锁保证顺序 wg sync
+
+## go中原子性操作有哪些
+
+
 ## go怎么保证顺序
+## go中chanel 和map是怎么实现的
+## go 数组和切片的区别
+1.切片是指针类型，数组是值类型；
+2.数组的长度是固定的，而切片不是（切片可以看成动态的数组）；
+3.切片比数组多一个容量（cap）属性；
+4.切片的底层是数组
+
+## go 数组怎么转换为切片
+- 循环赋值
+- Copy（dst,src） 将src的值全部复制到dst中；copy函数是将于将内容从一个数组切片复制到另一个数组切片，如果带入数组参数是无法通过编译的所以我们这边要使用[:]来把数组「伪装」成一个切片。
+- s:= arr[startIndex:endIndex]
 
 ## 隐式强制转换
 ## 数据类型封包解包
+
 ## interface 怎么判断类型
 多个可以这样，
 ```
