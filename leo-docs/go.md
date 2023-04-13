@@ -79,6 +79,7 @@ redo log包括两部分：一个是内存中的日志缓冲(redo log buffer)，�
 
 
 ### undo log
+
 数据库事务四大特性中有一个是原子性，具体来说就是 原子性是指对数据库的一系列操作，要么全部成功，要么全部失败，不可能出现部分成功的情况。实际上，原子性底层就是通过undo log实现的。
 
 undo log主要记录了数据的逻辑变化，比如一条INSERT语句，对应一条DELETE的undo log，对于每个UPDATE语句，对应一条相反的UPDATE的undo log，这样在发生错误时，就能回滚到事务之前的数据状态。同时，undo log也是MVCC(多版本并发控制)实现的关键。
@@ -193,4 +194,3 @@ func test(value interface{}) {
 
 ## 微服务演进数据依赖
 ## kafuka 怎么重试
-
