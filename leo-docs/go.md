@@ -9,9 +9,10 @@ goroutine开启的数量过多
 - 在使用select时，所有的case都阻塞，没有正确退出，导致goroutine一直存在
 - Goroutine进入死循环
 
-- 在Goroutine中使用到了channel时，要考虑清楚channel何时可能会阻塞，以及阻塞时的具体情况
-- 创建了一个Goroutine时，就要考虑清楚Goroutine应该如何结束
-- 注意代码程序的逻辑，切忌在代码中出现死循环
+解决方法：
+1. 在Goroutine中使用到了channel时，要考虑清楚channel何时可能会阻塞，以及阻塞时的具体情况
+2. 创建了一个Goroutine时，就要考虑清楚Goroutine应该如何结束
+3. 注意代码程序的逻辑，切忌在代码中出现死循环
 
 ## go为什么支持高并发
 Go 语言的 Goroutine 和 Channel 
@@ -28,9 +29,21 @@ PHP 社区多于 Go 语言，其支持程度令人惊讶。我知道在使用 Go
 
 
 ## 怎么保证主协程等待所有的协程执行完毕
-1. wg  add done wait
-2. 缓冲的channel for循环十个读取
-3. 无缓冲的channel 
+在Go语言中，有多种方式可以保证主协程等待所有的协程执行完毕。以下是其中的几种方式：
+
+1. 使用 WaitGroup
+   
+   WaitGroup 可以用来等待一组协程的结束。在主协程中，可以创建一个 WaitGroup，并将其计数器设置为要等待的协程数。每个协程在执行完毕后都需要调用 Done() 方法，以减少计数器的值。最后，在主协程中可以调用 Wait() 方法来阻塞等待所有协程的结束。
+
+2. 使用 Channel
+   
+   可以创建一个无缓冲的 Channel，每个协程在执行完毕后向该 Channel 中发送一个信号。在主协程中，可以使用一个 for 循环来接收该 Channel 中的所有信号。当接收到所有信号后，可以退出循环，表示所有协程执行完毕。
+
+3. 使用 Context
+   
+   Go 1.7 引入了 Context 包，可以用来在协程之间传递上下文信息。可以创建一个 Context，然后在每个协程中传递该 Context。在主协程中，可以调用该 Context 的 Done() 方法来阻塞等待所有协程的结束。
+
+
 
 ## mq怎么保证顺序执行
 kafuka ，写topic的partition时候可以指定key，这样可以保写入的时候都是在一个partition

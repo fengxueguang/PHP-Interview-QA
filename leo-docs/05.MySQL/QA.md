@@ -12,7 +12,6 @@
 - 提交读(READ COMMITTED)：事务未提交，对自己可见，两次同样查询，可能得到不同结果
 
 - 可重复读(REPEATABLE READ)：同一个事务多次读取结果一致。解决脏读问题
-
 > MySQL 默认事务隔离级别
 
 - 可串行化(SERIALIZABLE)：强制事务串行执行
@@ -39,7 +38,7 @@ InnoDB会根据一下两个条件检查每行记录：
 过期时间=当前事务系统版本号
 
 #### update
-其实对老数据做了delte操作，然后insert一行数据，相当于 delete+insert，参照上面两个
+其实对老数据做了delete操作，然后insert一行数据，相当于 delete+insert，参照上面两个
 
 ### inodb的索引
 假设，我们有一个主键列为 ID 的表，表中有字段 k，并且在 k 上有索引。
