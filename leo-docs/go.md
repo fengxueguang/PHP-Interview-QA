@@ -133,6 +133,8 @@ fatal error: all goroutines are asleep - deadlock!
 
 ## go怎么保证顺序
 ## go中chanel 和map是怎么实现的
+map就是hash表
+
 ## go 数组和切片的区别
 1.切片是指针类型，数组是值类型；
 2.数组的长度是固定的，而切片不是（切片可以看成动态的数组）；
